@@ -222,3 +222,104 @@ puede despachar. Nos encontramos con un problema de congestión.
 En el caso 1 la fuente limitante es el data rate en el tramo que va del nodeRx.queue al nodeRx.sink.
 
 En el caso 2 la fuente limitante es el data rate en el tramo que va del Network.queue al NodeRx.queue.
+
+---
+
+---
+
+---
+
+---
+
+---
+
+## Diseño
+
+Implementación del sistema de control de flujo y congestión (entre destino y el generador) para evitar la perdidas de paquetes por saturación de buffers. 
+
+## Más módulos nuevos agregados
+
+Para lograr dicha implemetación fueron agregados dos módulos
+`transportTx` y `transportRx` a los módulos de la parte de análisis `NodeTx` y `NodeRx` respectivamente.
+
+## `Caso 1`
+
+En este caso los valores seteados de Data Rate y Delay fueron:
+
+- NodeTx (nodeTx.gateio$o) a Queue (queuei.in): datarate = 1 Mbps y delay = 100 us
+
+- Queue (queuei.out) a NodeRx (nodeRx.gateio$i): datarate = 1 Mbps y delay = 100 us
+
+- Queue (traRx.toApp) a Sink (sink.in): datarate = 0.5 Mbps
+
+## Analisis previo:
+
+En este caso de estudio se verifica como el problema de flujo es manejado por el módulo TranRx, ya que este al ver colapsado su buffer de almacenamiento de paquetes, envía un mensaje de alerta al módulo TranTx para que decremente la frecuencia con la que envía paquetes por la conexión y de este modo al estar el buffer de TranRx lleno no tener que descartar paquetes.
+
+## Analisis por intervalos de generacion exponencial
+
+### Intervalo de generacion = 0.1
+
+#### Grafico de todos los datos
+
+![General](imagenes\parte2\caso1\general.jpg "Todos los datos")
+
+#### NodeTx.queue
+
+![NodeTx.queue](imagenes\parte2\caso1\nodeRx_traRx.jpg "NodeTx.queue")
+
+#### Queuei
+
+![queue](imagenes\parte2\caso1\queuei.jpg "queue")
+
+#### NodeRx.queue
+
+![NodeRx.queue](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx.queue")
+
+#### NodeRx delay
+
+![NodeRx.delay](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx delay")
+
+
+## `Caso 2`
+
+En este caso los valores seteados de Data Rate y Delay fueron:
+
+- NodeTx (nodeTx.gateio$o) a Queue (queue.in): datarate = 1 Mbps y delay = 100 us
+
+-  Queue (queuei.out) a NodeRx (nodeRx.gateio$i): datarate = 0.5 Mbps y delay = 100 us
+
+- Queue (traRx.toApp) a Sink (sink.in): datarate = 1 Mbps
+
+## Analisis previo:
+
+En el presente caso de estudio, al contrario que el caso 1, se presenta un problema de congestión en la red el cual es manejado por los nodos internos de la red que componen el camino entre el generador y el receptor por el cual transita el paquete enviado.
+En este caso se puede verificar en las graficas el manejo de esta situación por el módulo Queue, el cual al ver colapsado su buffer de almacenamiento de paquetes libera un mensaje a la red indicando esta situación de congestión el cual es pasado hasta el generador para indicarle a este que disminuya la frecuencia de generación de paquetes y de esta forma poder lidiar con el problema de congestión en la red.
+
+## Analisis por intervalos de generacion exponencial
+
+### Intervalo de generacion = 0.1
+
+#### Grafico de todos los datos
+
+![General](imagenes\parte2\caso1\general.jpg "Todos los datos")
+
+#### NodeTx.queue
+
+![NodeTx.queue](imagenes\parte2\caso1\nodeRx_traRx.jpg "NodeTx.queue")
+
+#### Queuei
+
+![queue](imagenes\parte2\caso1\queuei.jpg "queue")
+
+#### NodeRx.queue
+
+![NodeRx.queue](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx.queue")
+
+#### NodeRx delay
+
+![NodeRx.delay](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx delay")
+
+`1. ¿Cómo cree que se comporta su algoritmo de control de flujo y congestión? ¿Funciona para el caso de estudio 1 y 2 por igual? ¿Por qué?`
+
+Nuestro algoritmo de control de flujo y congestión funciona de la misma manera para ambos casos porque en ambos la solución implementada fue bajar la cantidad de datos liberados del buffer emisor para evitar la perdida de paquetes en el buffer del receptor (Caso 1, control de flujo) y también en el buffer intermedio (Caso 2, control de congestión).

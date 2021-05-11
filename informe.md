@@ -262,23 +262,23 @@ En este caso de estudio se verifica como el problema de flujo es manejado por el
 
 #### Grafico de todos los datos
 
-![General](imagenes\parte2\caso1\general.jpg "Todos los datos")
+![General](imagenes/parte2/caso1/general.jpg)
 
 #### NodeTx.queue
 
-![NodeTx.queue](imagenes\parte2\caso1\nodeRx_traRx.jpg "NodeTx.queue")
+![NodeTx.queue](imagenes/parte2/caso1/nodeTx_traTx.jpg)
 
 #### Queuei
 
-![queue](imagenes\parte2\caso1\queuei.jpg "queue")
+![queue](imagenes/parte2/caso1/queuei.jpg)
 
 #### NodeRx.queue
 
-![NodeRx.queue](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx.queue")
+![NodeRx.queue](imagenes/parte2/caso1/nodeRx_traRx.jpg)
 
 #### NodeRx delay
 
-![NodeRx.delay](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx delay")
+![NodeRx.delay](imagenes/parte2/caso1/nodeRx_sink.jpg)
 
 
 ## `Caso 2`
@@ -302,23 +302,23 @@ En este caso se puede verificar en las graficas el manejo de esta situación por
 
 #### Grafico de todos los datos
 
-![General](imagenes\parte2\caso1\general.jpg "Todos los datos")
+![General](imagenes/parte2/caso2/general.jpg)
 
 #### NodeTx.queue
 
-![NodeTx.queue](imagenes\parte2\caso1\nodeRx_traRx.jpg "NodeTx.queue")
+![NodeTx.queue](imagenes/parte2/caso2/nodeTx_traTx.jpg)
 
 #### Queuei
 
-![queue](imagenes\parte2\caso1\queuei.jpg "queue")
+![queue](imagenes/parte2/caso2/queuei.jpg)
 
 #### NodeRx.queue
 
-![NodeRx.queue](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx.queue")
+![NodeRx.queue](imagenes/parte2/caso2/nodeRx_traRx.jpg)
 
 #### NodeRx delay
 
-![NodeRx.delay](imagenes\parte2\caso1\nodeRx_sink.jpg "NodeRx delay")
+![NodeRx.delay](imagenes/parte2/caso2/nodeRx_sink.jpg)
 
 `1. ¿Cómo cree que se comporta su algoritmo de control de flujo y congestión? ¿Funciona para el caso de estudio 1 y 2 por igual? ¿Por qué?`
 

@@ -69,7 +69,6 @@ void TransportRx::handleMessage(cMessage * msg) {
                 if (buffer.getLength() >= par("bufferSize").intValue()) { // If buffer is full
                     // drop packet
                     delete msg;
-                    this->bubble("packet dropped");
                     packetDropVector.record(1);
                 } else {
                     // enqueue the packet

@@ -62,7 +62,7 @@ void Queue::handleMessage(cMessage *msg) {
     } else { // if msg is a data packet
         // If queue's buffer fills up, it will send a message to indicate
         // there is a network congestion issue
-        if (buffer.getLength() == par("bufferSize").intValue() * 0.90 && !congestion) {
+        if (buffer.getLength() == par("bufferSize").intValue() -1 && !congestion) {
             Feedback * f = new Feedback();
             f->setKind(2);
             f->setByteLength(20);

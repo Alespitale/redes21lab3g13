@@ -87,7 +87,7 @@ void TransportRx::handleMessage(cMessage * msg) {
             Feedback * f = new Feedback();
             f->setKind(2);
             f->setByteLength(20);
-            f->setReceiverBuffer(par("bufferSize").intValue() - buffer.getLength());
+            f->setReceiverBuffer(par("bufferSize").intValue() - buffer.getLength() - 5);
             f->setCongestion(congestion);
             send(f,"toOut$o");
         }
